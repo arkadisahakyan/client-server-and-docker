@@ -1,0 +1,21 @@
+services:
+  client:
+    build:
+      context: ./client/.
+    image: client
+    depends_on:
+      - server
+    networks:
+      - client-server-network
+  server:
+    build:
+      context: ./server/.
+    image: server
+    ports:
+      - 8888:8888
+    networks:
+      - client-server-network
+networks:
+  client-server-network:
+    name: client-server-network
+    driver: bridge
